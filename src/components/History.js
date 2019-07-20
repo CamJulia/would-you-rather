@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import '../App.css'
 import { connect } from 'react-redux'
+import Nav from './Nav'
 
 class History extends Component {
   render() {
@@ -9,6 +10,7 @@ class History extends Component {
 
     return (
       <div>
+        <Nav />
         <h1>Your history</h1>
         <div className='flexContainer'>
           <div className='flexItem'>
