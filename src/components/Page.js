@@ -2,34 +2,20 @@ import React, { Component } from 'react'
 import '../App.css';
 import { connect } from 'react-redux'
 import Nav from './Nav'
-import WouldYou from './WouldYou'
+// import WouldYou from './WouldYou'
 import Answer from './Answer'
-import Stats from './Stats'
+// import Stats from './Stats'
 import History from './History'
 import { setAuthedUser } from '../actions/authedUser';
+import Highscore from './Highscore';
+import Login from './Login';
+import Ask from './Ask';
+import { Route } from 'react-router-dom'
 
 class Page extends Component {
   setAuthUser = (e) => {
     const name = e.currentTarget.getAttribute('name');
     this.props.dispatch(setAuthedUser(name))
-  }
-
-  renderUsers() {
-    const { usersIds, users } = this.props;
-
-    if (!usersIds.length) return null;
-
-    return (
-      usersIds.map((player) => {
-        console.log('Player please: ', player)
-        return <button className='player' key={users[player].id} name={users[player].id} onClick={this.setAuthUser}>
-          {/* <div className='player'> */}
-          <img src={users[player].avatarURL} alt={`Avatar of ${users[player].name}`} />
-          <p>{users[player].name}</p>
-          {/* </div> */}
-        </button >
-      })
-    );
   }
 
   render() {
@@ -38,15 +24,20 @@ class Page extends Component {
         {
           this.props.authedUser ?
             <>
-              < Nav />
-              <WouldYou />
-              <History />
-              {/* <Answer />
-              <Stats /> */}
+              {/* < Nav /> */}
+              {this.props.loading === true
+                ? null
+                : <div>
+                  <Route exact path='/' component={Answer}></Route>
+                  <Route exact path='/history' component={History}></Route>
+                  <Route exact path='/highscore' component={Highscore}></Route>
+                  <Route exact path='/ask' component={Ask}></Route>
+                  <Route exact path='/login' component={Login}></Route>
+                </div>}
+
             </>
             : <div className='loginScreen'>
-              <WouldYou />
-              {this.renderUsers()}
+              <Route exact path='/' component={Login}></Route>
             </div>
         }
 

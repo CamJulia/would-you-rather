@@ -12,13 +12,6 @@ class Player extends Component {
       : player = { name: 'no name', avatarURL: 'https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fmaxcdn.icons8.com%2FShare%2Ficon%2FUsers%2Fcircled_user_female1600.png&f=1' }
 
 
-
-    console.log('Player props: ', player.name)
-    // const {
-    //   id, name, avatarURL
-    // } = player
-
-
     return (
 
       <div className='player'>

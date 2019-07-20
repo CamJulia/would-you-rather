@@ -3,6 +3,7 @@ import '../App.css';
 import { connect } from 'react-redux'
 import { getQuestions, getUsers } from '../actions/shared'
 import Page from './Page';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 class App extends Component {
 
@@ -13,9 +14,11 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App" >
-        <Page />
-      </div>
+      <Router>
+        <div className="App" >
+          <Page />
+        </div>
+      </Router>
     );
   }
 }

@@ -1,25 +1,56 @@
 import React, { Component } from 'react'
 import '../App.css';
 import Player from './Player'
+import { NavLink } from 'react-router-dom'
+import { setAuthedUser } from '../actions/authedUser'
+import { connect } from 'react-redux'
 
 
 class Nav extends Component {
+  resetAuthedUser = () => {
+    const name = null;
+    this.props.dispatch(setAuthedUser(name))
+  }
+
   render() {
     return (
-      <div className='nav'>
+
+      <nav className='nav'>
         <div className='navbar'>
-          <Player />
+          <div>
+            <Player />
+          </div>
+          <ul className='navbar-items'>
+            <li>
+              <NavLink to='/' exact>
+                answer
+          </NavLink>
+            </li>
+            <li>
+              <NavLink to='/ask'>
+                ask
+          </NavLink>
+            </li>
+            <li>
+              <NavLink to='/history'>
+                my history
+          </NavLink>
+            </li>
+            <li>
+              <NavLink to='/highscore'>
+                highscore
+          </NavLink>
+            </li>
+            <li>
+              <NavLink to='/' exact onClick={this.resetAuthedUser}>
+                logout
+          </NavLink>
+            </li>
+          </ul>
         </div>
-        <div className='navbar-items'>
-          <p>answer</p>
-          <p>ask</p>
-          <p>my history</p>
-          <p>highscore</p>
-          <p>logout</p>
-        </div>
-      </div>
+      </nav>
     )
   }
 }
 
-export default Nav
+export default connect()(Nav)
