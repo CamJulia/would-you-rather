@@ -18,13 +18,15 @@ class Login extends Component {
     return (
       <div>
         <h1>Would you rather be...</h1>
-        {usersIds.map((player) => {
+        <div className='login'>
+          {usersIds.map((player) => {
 
-          return <button className='player' key={users[player].id} name={users[player].id} onClick={this.setAuthUser}>
-            <img src={users[player].avatarURL} alt={`Avatar of ${users[player].name}`} />
-            <p>{users[player].name}</p>
-          </button >
-        })}
+            return <button className='player' key={users[player].id} name={users[player].id} onClick={this.setAuthUser}>
+              <img src={users[player].avatarURL} alt={`Avatar of ${users[player].name}`} />
+              <p>{users[player].name}</p>
+            </button >
+          })}
+        </div>
       </div>
     )
   }
