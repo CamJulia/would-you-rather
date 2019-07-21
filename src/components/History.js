@@ -29,12 +29,12 @@ class History extends Component {
             {answeredQuestions.map(question => {
               if (question[1] === 'optionOne') {
                 return (
-                  <div>
+                  <div key={question.id}>
                     <p>...<b>{question[0].optionOne.text}</b> than {question[0].optionTwo.text}!</p>
                   </div>)
               } else {
                 return (
-                  <div>
+                  <div key={question.id}>
                     <p>...<b>{question[0].optionTwo.text}</b> than {question[0].optionOne.text}!</p>
                   </div>)
               }
