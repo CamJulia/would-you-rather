@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
 import '../App.css';
 import { connect } from 'react-redux'
-import Nav from './Nav'
-// import WouldYou from './WouldYou'
 import Answer from './Answer'
-// import Stats from './Stats'
 import History from './History'
 import { setAuthedUser } from '../actions/authedUser';
 import Highscore from './Highscore';
@@ -24,7 +21,6 @@ class Page extends Component {
         {
           this.props.authedUser ?
             <>
-              {/* < Nav /> */}
               {this.props.loading === true
                 ? null
                 : <div>

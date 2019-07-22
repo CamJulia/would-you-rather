@@ -8,7 +8,6 @@ class Highscore extends Component {
 
     const { authedUser, userScores, users } = this.props
 
-    console.log('This is highscore: ', userScores, authedUser)
     return (
       <div>
         <Nav />

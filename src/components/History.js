@@ -6,7 +6,7 @@ import Nav from './Nav'
 class History extends Component {
   render() {
 
-    const { users, questions, authedUser, askedQuestions, answeredQuestions } = this.props
+    const { askedQuestions, answeredQuestions } = this.props
 
     return (
       <div>
@@ -18,7 +18,7 @@ class History extends Component {
             <h3>Would you rather...</h3>
             {askedQuestions.map(question => {
 
-              return <div key={question.id + 'rhej'}>
+              return <div key={question.id + 'myQuestion'}>
                 <p>...{question.optionOne.text} or {question.optionTwo.text}?</p>
                 <hr />
               </div>
@@ -37,14 +37,14 @@ class History extends Component {
 
               if (question[1] === 'optionOne') {
                 return (
-                  <div key={question.id}>
+                  <div key={question.id + question[0].optionOne.text}>
                     <p>...<b>{question[0].optionOne.text}</b> than {question[0].optionTwo.text}!</p>
                     <p>(Just like <b>{percentOne}%</b> of players.)</p>
                     <hr />
                   </div>)
               } else {
                 return (
-                  <div key={question.id}>
+                  <div key={question.id = question[0].optionTwo.text}>
                     <p>...<b>{question[0].optionTwo.text}</b> than {question[0].optionOne.text}!</p>
                     <p>(Just like <b>{percentTwo}%</b> of players.)</p>
                     <hr />

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-// import Player from './Player'
 import { connect } from 'react-redux'
 import { setAuthedUser } from '../actions/authedUser'
 
