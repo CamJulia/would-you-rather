@@ -2,18 +2,14 @@ import React, { Component } from 'react'
 import '../App.css';
 import { connect } from 'react-redux'
 import Nav from './Nav'
+import { saveQuestionAnswer } from '../actions/questions';
 
 class Answer extends Component {
 
-
-
   render() {
 
-    const { users, questions, authedUser, newQuestions } = this.props
-    const player = users[authedUser]
-
-    // questions asked by authedUser
-    console.log('New Questions: ', newQuestions)
+    const { newQuestions } = this.props
+    console.log('This is newQuestions: ', newQuestions.length)
 
     return (
       <div >
@@ -21,14 +17,22 @@ class Answer extends Component {
         <div className='answers'>
           <h1>Would you rather...</h1>
           <div className='answer'>
-            {newQuestions.map(question => {
-              console.log('This is a new question: ', question.optionOne.text)
-              return (< div key={question.id} className='flexContainer' >
-                <button className='answerBtn'>{question.optionOne.text}</button>
-                <p>or</p>
-                <button className='answerBtn'>{question.optionTwo.text}</button>
-              </div>)
-            })}
+            {newQuestions.length === 0 ?
+              <div><h2>No questions left to answer.</h2>
+                <h3>How about you ask a question yourself?</h3></div>
+              : newQuestions.map(question => {
+                return (< div key={question.id} className='flexContainer' >
+                  <button className='answerBtn' onClick={() => {
+                    this.props.dispatch(saveQuestionAnswer({ question, answer: 'optionOne' }))
+                  }
+                  }>{question.optionOne.text}</button>
+                  <p>or</p>
+                  <button className='answerBtn' onClick={() => {
+                    this.props.dispatch(saveQuestionAnswer({ question, answer: 'optionTwo' }))
+                  }}>{question.optionTwo.text}</button>
+                </div>)
+              })
+            }
           </div>
         </div>
       </div>
@@ -36,20 +40,13 @@ class Answer extends Component {
   }
 }
 
-
 function mapStateToProps({ questions, authedUser, users }) {
 
   const newQuestions = []
   const answeredQuestions = Object.keys(users[authedUser].answers)
 
-  console.log('Answered Questions>>>> ', answeredQuestions)
-
   for (let i in questions) {
-    if (answeredQuestions.indexOf(i) > -1) {
-      newQuestions.push(questions[i])
-    } else {
-      console.log('Already answered!')
-    }
+    if (answeredQuestions.indexOf(i) === -1) newQuestions.push(questions[i]);
   }
 
   return {
