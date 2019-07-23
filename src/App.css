@@ -75,14 +75,20 @@ h1 {
   font-size: 4em;
   text-align: center;
   text-transform: uppercase;
-  margin: 1em auto;
+  margin: 1em auto 0.5em auto;
+}
+
+h2 {
+  text-align: center;
 }
 
 .answer {
-  width: 100%;
+  width: 80%;
+  margin: 0 auto;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
 }
 
 .answerBtn {
@@ -139,4 +145,30 @@ td {
 
 .myScore {
   background-color: rgba(188, 143, 143, 0.5);
+}
+
+form {
+  width: 70%;
+  padding: 1em;
+  margin: 0 auto;
+  border: 2px solid rosybrown;
+  border-radius: 10px;
+}
+
+.form {
+  display: flex;
+  justify-content: space-around;
+}
+
+.submit {
+  width: 10em;
+  height: 3em;
+  margin: 1em 42%;
+  border-radius: 5px;
+}
+
+.form input {
+  width: 15em;
+  height: 5em;
+  border-radius: 5px;
 }
