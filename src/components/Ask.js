@@ -25,7 +25,6 @@ class Ask extends Component {
     const { optionOne, optionTwo } = this.state;
 
     if (optionOne.trim().length < 2 || optionTwo.trim().length < 2) {
-      console.log('Trim: ', optionOne, optionTwo)
       this.setState({ error: true });
       return;
     }

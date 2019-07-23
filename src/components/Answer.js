@@ -9,7 +9,6 @@ class Answer extends Component {
   render() {
 
     const { newQuestions } = this.props
-    console.log('This is newQuestions: ', newQuestions.length)
 
     return (
       <div >

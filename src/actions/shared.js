@@ -6,7 +6,6 @@ export function getQuestions() {
   return (dispatch) => {
     return _getQuestions()
       .then(questions => {
-        console.log('Questions: ', questions)
         dispatch(receiveQuestions(questions))
       }
       )
