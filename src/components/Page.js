@@ -1,44 +1,43 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import '../App.css';
-import { connect } from 'react-redux'
-import Answer from './Answer'
-import History from './History'
+import { connect } from 'react-redux';
+import Dashboard from './Dashboard';
+import Answer from './Answer';
+import History from './History';
 import { setAuthedUser } from '../actions/authedUser';
 import Highscore from './Highscore';
 import Login from './Login';
 import Ask from './Ask';
-import { Route } from 'react-router-dom'
+import { Route } from 'react-router-dom';
 
 class Page extends Component {
-  setAuthUser = (e) => {
+  setAuthUser = e => {
     const name = e.currentTarget.getAttribute('name');
-    this.props.dispatch(setAuthedUser(name))
-  }
+    this.props.dispatch(setAuthedUser(name));
+  };
 
   render() {
     return (
       <div>
-        {
-          this.props.authedUser ?
-            <>
-              {this.props.loading === true
-                ? null
-                : <div>
-                  <Route exact path='/' component={Answer}></Route>
-                  <Route exact path='/history' component={History}></Route>
-                  <Route exact path='/highscore' component={Highscore}></Route>
-                  <Route exact path='/ask' component={Ask}></Route>
-                  <Route exact path='/login' component={Login}></Route>
-                </div>}
-
-            </>
-            : <div className='loginScreen'>
-              <Route exact path='/' component={Login}></Route>
-            </div>
-        }
-
+        {this.props.authedUser ? (
+          <>
+            {this.props.loading === true ? null : (
+              <div>
+                <Route exact path="/" component={Dashboard} />
+                <Route exact path="/history" component={History} />
+                <Route exact path="/highscore" component={Highscore} />
+                <Route exact path="/ask" component={Ask} />
+                <Route exact path="/login" component={Login} />
+              </div>
+            )}
+          </>
+        ) : (
+          <div className="loginScreen">
+            <Route exact path="/" component={Login} />
+          </div>
+        )}
       </div>
-    )
+    );
   }
 }
 
@@ -48,7 +47,7 @@ function mapStateToProps({ questions, authedUser, users }) {
     authedUser,
     users,
     questions
-  }
+  };
 }
 
-export default connect(mapStateToProps)(Page)
+export default connect(mapStateToProps)(Page);
