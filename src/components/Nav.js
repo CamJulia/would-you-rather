@@ -16,7 +16,9 @@ class Nav extends Component {
       <nav className="nav">
         <div className="navbar">
           <div>
-            <Player />
+            <NavLink to="/">
+              <Player />
+            </NavLink>
           </div>
           <ul className="navbar-items">
             <li>
