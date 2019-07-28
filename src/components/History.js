@@ -77,11 +77,11 @@ function mapStateToProps({ questions, authedUser, users }) {
   const answeredQuestions = [];
 
   users[authedUser].questions.forEach(question => {
-    askedQuestions.push(questions[question]);
+    askedQuestions.unshift(questions[question]);
   });
 
   for (let i in users[authedUser].answers) {
-    answeredQuestions.push([
+    answeredQuestions.unshift([
       questions[i], // the actual question object from questions | OBJECT
       users[authedUser].answers[i], // the selected option for this question | STRING
       questions[i].optionOne.votes.length, // how many people voted for this option

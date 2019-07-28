@@ -57,7 +57,7 @@ function mapStateToProps({ questions, authedUser, users }) {
   const answeredQuestions = Object.keys(users[authedUser].answers);
 
   for (let i in questions) {
-    if (answeredQuestions.indexOf(i) === -1) newQuestions.push(questions[i]);
+    if (answeredQuestions.indexOf(i) === -1) newQuestions.unshift(questions[i]);
   }
 
   return {
