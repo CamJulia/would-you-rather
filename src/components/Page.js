@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import '../App.css';
 import { connect } from 'react-redux';
 import Dashboard from './Dashboard';
-import Answer from './Answer';
 import History from './History';
 import { setAuthedUser } from '../actions/authedUser';
 import Highscore from './Highscore';
 import Login from './Login';
 import Ask from './Ask';
+import Question from './Question';
 import { Route } from 'react-router-dom';
 
 class Page extends Component {
@@ -28,6 +28,7 @@ class Page extends Component {
                 <Route exact path="/highscore" component={Highscore} />
                 <Route exact path="/ask" component={Ask} />
                 <Route exact path="/login" component={Login} />
+                <Route path="/questions/:id" component={Question} />
               </div>
             )}
           </>
