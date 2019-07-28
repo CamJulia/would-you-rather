@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import '../App.css';
 import { connect } from 'react-redux';
-import Nav from './Nav';
 import { saveQuestionAnswer } from '../actions/questions';
+import { Link } from 'react-router-dom';
 
 class Answer extends Component {
   render() {
@@ -22,6 +22,9 @@ class Answer extends Component {
               newQuestions.map(question => {
                 return (
                   <div key={question.id} className="flexContainer">
+                    <Link to={`/questions/${question.id}`}>
+                      <p>link/</p>
+                    </Link>
                     <button
                       className="answerBtn"
                       onClick={() => {
