@@ -17,8 +17,8 @@ const answeredPollQuestion = (question, users) => {
           <img src={users[q.author].avatarURL} alt="avatar_image" />
         </div>
         <div>
-          <h3>Would you rather</h3>
-          <p>{q.optionOne.text}</p>
+          <h3>Would you rather...</h3>
+          <p>{q.optionOne.text}...</p>
           <Link to={`/questions/${q.id}`}>
             <button>View Poll</button>
           </Link>
@@ -60,13 +60,27 @@ class Dashboard extends Component {
             </button>
           </div>
           <div>
-            {this.state.view === 'unanswered'
-              ? unansweredQuestions.map(question =>
+            {this.state.view === 'unanswered' ? (
+              <h2>Unanswered Questions</h2>
+            ) : (
+              <h2>Answered Questions</h2>
+            )}
+
+            {this.state.view === 'unanswered' ? (
+              unansweredQuestions.length > 0 ? (
+                unansweredQuestions.map(question =>
                   answeredPollQuestion(question, users)
                 )
-              : answeredQuestions.map(question =>
-                  answeredPollQuestion(question, users)
-                )}
+              ) : (
+                <h3>Sorry, no questions left to answer.</h3>
+              )
+            ) : answeredQuestions.length > 0 ? (
+              answeredQuestions.map(question =>
+                answeredPollQuestion(question, users)
+              )
+            ) : (
+              <h3>Sorry, you have no question answered yet.</h3>
+            )}
           </div>
         </div>
       </div>
