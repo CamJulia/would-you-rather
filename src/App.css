@@ -15,7 +15,7 @@ button {
 }
 
 button:hover {
-  background-color: rgba(188, 143, 143, 0.459);
+  background-color: rgba(188, 143, 143, 0.5);
 }
 
 .navbar {
@@ -202,4 +202,78 @@ form {
   width: 15em;
   height: 5em;
   border-radius: 5px;
+}
+
+.info-container {
+  width: 70%;
+  margin: 2em auto;
+  border: 2px solid rosybrown;
+  border-radius: 10px;
+}
+
+.info-header {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 2px solid rosybrown;
+  justify-content: space-around;
+}
+
+.info-header img {
+  width: 10%;
+  height: 10%;
+  margin-top: 5px;
+}
+
+.info-detail {
+  margin: 1em auto;
+  text-align: center;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* align-content: center; */
+}
+
+.percent {
+  /* display: flex;
+  justify-content: space-between; */
+  width: 80%;
+  margin: 0 auto;
+}
+
+.percent p {
+  text-align: left;
+  padding-left: 10px;
+  margin-top: -1.7em;
+}
+
+.dashboard-qs {
+  width: 80%;
+  margin: 1em auto;
+}
+
+.dash-q {
+  display: flex;
+  flex-direction: row;
+  border-top: 2px solid rosybrown;
+  padding: 2em;
+}
+
+.dash-q-detail {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+  margin: 0 2em;
+}
+
+.dash-q-detail img {
+  width: 30%;
+}
+
+.my-vote {
+  position: absolute;
+  left: 21%;
+  margin-top: -33px;
+  background-color: rgba(188, 143, 143, 0.3);
+  border-radius: 50%;
+  border: 1px solid rosybrown;
+  padding: 2px;
 }
