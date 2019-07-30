@@ -39,15 +39,31 @@ class Question extends Component {
             <div className="info-detail">
               <h3>Would you would rather...</h3>
               <div key={question.id + question['optionOne'].text}>
-                <h5>...{question['optionOne'].text}</h5>
+                <h4>...{question['optionOne'].text}</h4>
                 <p>Votes: {votesOptionOne}</p>
+                {question['optionOne'].votes.indexOf(authedUser) > -1 ? (
+                  <img
+                    className="my-vote"
+                    src={users[authedUser].avatarURL}
+                    alt="avatar_image"
+                  />
+                ) : null}
+
                 <div className="percent">
                   <div style={percentOneStyle} />
                   <p>{percentOne}%</p>
                 </div>
                 <p>or</p>
-                <h5>{question['optionTwo'].text}?</h5>
+                <h4>{question['optionTwo'].text}?</h4>
                 <p>Votes: {votesOptionTwo}</p>
+                {question['optionTwo'].votes.indexOf(authedUser) > -1 ? (
+                  <img
+                    className="my-vote"
+                    src={users[authedUser].avatarURL}
+                    alt="avatar_image"
+                  />
+                ) : null}
+
                 <div className="percent">
                   <div style={percentTwoStyle} />
                   <p>{percentTwo}%</p>
