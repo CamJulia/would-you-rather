@@ -8,19 +8,17 @@ import Nav from './Nav';
 const answeredPollQuestion = (question, users) => {
   const { question: q } = question;
   return (
-    <div key={q.id}>
-      <h3>{users[q.author].name} asks:</h3>
-      <div>
-        <div>
-          <img src={users[q.author].avatarURL} alt="avatar_image" />
-        </div>
-        <div>
-          <h3>Would you rather...</h3>
-          <p>{q.optionOne.text}...</p>
-          <Link to={`/questions/${q.id}`}>
-            <button>View Poll</button>
-          </Link>
-        </div>
+    <div key={q.id} className="dash-q">
+      <div className="dash-q-detail">
+        <h3>{users[q.author].name} asks:</h3>
+        <img src={users[q.author].avatarURL} alt="avatar_image" />
+      </div>
+      <div className="dash-q-detail">
+        <h3>Would you rather...</h3>
+        <p>{q.optionOne.text}...</p>
+        <Link to={`/questions/${q.id}`}>
+          <button>View Poll</button>
+        </Link>
       </div>
     </div>
   );
@@ -52,7 +50,7 @@ class Dashboard extends Component {
               Answered
             </button>
           </div>
-          <div>
+          <div className="dashboard-qs">
             {this.state.view === 'unanswered' ? (
               <h2>Unanswered Questions</h2>
             ) : (
