@@ -4,8 +4,6 @@ import '../App.css';
 import { Link } from 'react-router-dom';
 
 import Nav from './Nav';
-import Answer from './Answer';
-import History from './History';
 
 const answeredPollQuestion = (question, users) => {
   const { question: q } = question;
@@ -34,12 +32,7 @@ class Dashboard extends Component {
   };
 
   render() {
-    const {
-      answeredQuestions,
-      unansweredQuestions,
-      authedUser,
-      users
-    } = this.props;
+    const { answeredQuestions, unansweredQuestions, users } = this.props;
 
     return (
       <div>

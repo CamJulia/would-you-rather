@@ -5,48 +5,80 @@ import { saveQuestionAnswer } from '../actions/questions';
 
 class Question extends Component {
   render() {
-    const { question, users, authedUser, thisShitIsAnswered } = this.props;
+    const {
+      question,
+      users,
+      authedUser,
+      thisShitIsAnswered,
+      votesOptionOne,
+      votesOptionTwo,
+      percentOne,
+      percentTwo
+    } = this.props;
+
+    const percentOneStyle = {
+      backgroundColor: 'rosybrown',
+      height: '2em',
+      width: `${percentOne}%`
+    };
+    const percentTwoStyle = {
+      backgroundColor: 'rosybrown',
+      height: '2em',
+      width: `${percentTwo}%`
+    };
 
     return (
       <div>
         <Nav />
-        {thisShitIsAnswered ? (
-          <div>
-            <h2>{users[question.author].name} asked:</h2>
-            <div>
-              <img src={users[question.author].avatarURL} alt="avatar_image" />
-            </div>
-            <h3>Would you would rather...</h3>
-            <h4>{question.optionOne.text}</h4>
-            <p>or</p>
-            <h4>{question.optionTwo.text}</h4>
-          </div>
-        ) : (
-          <div>
-            <h2>{users[question.author].name} asks:</h2>
+        <div className="info-container">
+          <div className="info-header">
             <img src={users[question.author].avatarURL} alt="avatar_image" />
-            <h3>Would you rather...</h3>
-            <button
-              className="answerBtn"
-              onClick={() => {
-                this.props.dispatch(
-                  saveQuestionAnswer({ question, answer: 'optionOne' })
-                );
-              }}>
-              {question.optionOne.text}
-            </button>
-            <p>or</p>
-            <button
-              className="answerBtn"
-              onClick={() => {
-                this.props.dispatch(
-                  saveQuestionAnswer({ question, answer: 'optionTwo' })
-                );
-              }}>
-              {question.optionTwo.text}?
-            </button>
+            <h2>{users[question.author].name} asked:</h2>
           </div>
-        )}
+          {thisShitIsAnswered ? (
+            <div className="info-detail">
+              <h3>Would you would rather...</h3>
+              <div key={question.id + question['optionOne'].text}>
+                <h5>...{question['optionOne'].text}</h5>
+                <p>Votes: {votesOptionOne}</p>
+                <div className="percent">
+                  <div style={percentOneStyle} />
+                  <p>{percentOne}%</p>
+                </div>
+                <p>or</p>
+                <h5>{question['optionTwo'].text}?</h5>
+                <p>Votes: {votesOptionTwo}</p>
+                <div className="percent">
+                  <div style={percentTwoStyle} />
+                  <p>{percentTwo}%</p>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="info-detail">
+              <h3>Would you would rather...</h3>
+              <button
+                className="answerBtn"
+                onClick={() => {
+                  this.props.dispatch(
+                    saveQuestionAnswer({ question, answer: 'optionOne' })
+                  );
+                }}>
+                {question.optionOne.text}
+              </button>
+              <p>or</p>
+              <button
+                className="answerBtn"
+                onClick={() => {
+                  this.props.dispatch(
+                    saveQuestionAnswer({ question, answer: 'optionTwo' })
+                  );
+                }}>
+                {question.optionTwo.text}?
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     );
   }
@@ -56,6 +88,10 @@ function mapStateToProps({ questions, users, authedUser }, props) {
   const questionId = props.match.params.id;
   const question = questions[questionId];
   let thisShitIsAnswered = true;
+  const votesOptionOne = question['optionOne']['votes'].length;
+  const votesOptionTwo = question['optionTwo']['votes'].length;
+  const percentOne = (100 / (votesOptionOne + votesOptionTwo)) * votesOptionOne;
+  const percentTwo = (100 / (votesOptionOne + votesOptionTwo)) * votesOptionTwo;
 
   const qsAnsweredByAuthedUser = Object.keys(users[authedUser].answers);
 
@@ -69,9 +105,22 @@ function mapStateToProps({ questions, users, authedUser }, props) {
     'This shit is bananas: ',
     thisShitIsAnswered,
     qsAnsweredByAuthedUser,
-    questionId
+    questionId,
+    votesOptionOne,
+    votesOptionTwo,
+    percentOne,
+    percentTwo
   );
-  return { question, users, authedUser, thisShitIsAnswered };
+  return {
+    question,
+    users,
+    authedUser,
+    thisShitIsAnswered,
+    votesOptionOne,
+    votesOptionTwo,
+    percentOne,
+    percentTwo
+  };
 }
 
 export default connect(mapStateToProps)(Question);
