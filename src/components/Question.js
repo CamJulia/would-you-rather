@@ -8,101 +8,108 @@ const percentBarStyle = {
   height: '2em'
 };
 
-class Question extends Component {
-  render() {
-    const {
-      question,
-      users,
-      authedUser,
-      thisShitIsAnswered,
-      votesOptionOne,
-      votesOptionTwo,
-      percentOne,
-      percentTwo
-    } = this.props;
+const AnsweredQuestion = props => {
+  const {
+    question,
+    users,
+    authedUser,
+    votesOptionOne,
+    votesOptionTwo,
+    percentOne,
+    percentTwo
+  } = props;
 
+  const renderPercentageBar = percentage => {
     return (
-      <div>
-        <Nav />
-        <div className="info-container">
-          <div className="info-header">
-            <img src={users[question.author].avatarURL} alt="avatar_image" />
-            <h2>{users[question.author].name} asked:</h2>
-          </div>
-          {thisShitIsAnswered ? (
-            <div className="info-detail">
-              <h3>Would you would rather...</h3>
-              <div key={question.id + question['optionOne'].text}>
-                <h4>...{question['optionOne'].text}</h4>
-                <p>Votes: {votesOptionOne}</p>
-                {question['optionOne'].votes.indexOf(authedUser) > -1 ? (
-                  <img
-                    className="my-vote"
-                    src={users[authedUser].avatarURL}
-                    alt="avatar_image"
-                  />
-                ) : null}
-
-                <div className="percent">
-                  <div
-                    style={{
-                      ...percentBarStyle,
-                      ...{ width: `${percentOne}%` }
-                    }}
-                  />
-                  <p>{percentOne}%</p>
-                </div>
-                <p>or</p>
-                <h4>{question['optionTwo'].text}?</h4>
-                <p>Votes: {votesOptionTwo}</p>
-                {question['optionTwo'].votes.indexOf(authedUser) > -1 ? (
-                  <img
-                    className="my-vote"
-                    src={users[authedUser].avatarURL}
-                    alt="avatar_image"
-                  />
-                ) : null}
-
-                <div className="percent">
-                  <div
-                    style={{
-                      ...percentBarStyle,
-                      ...{ width: `${percentTwo}%` }
-                    }}
-                  />
-                  <p>{percentTwo}%</p>
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div className="info-detail">
-              <h3>Would you would rather...</h3>
-              <button
-                className="answerBtn"
-                onClick={() => {
-                  this.props.dispatch(
-                    saveQuestionAnswer({ question, answer: 'optionOne' })
-                  );
-                }}>
-                {question.optionOne.text}
-              </button>
-              <p>or</p>
-              <button
-                className="answerBtn"
-                onClick={() => {
-                  this.props.dispatch(
-                    saveQuestionAnswer({ question, answer: 'optionTwo' })
-                  );
-                }}>
-                {question.optionTwo.text}?
-              </button>
-            </div>
-          )}
-        </div>
+      <div className="percent">
+        <div
+          style={{
+            ...percentBarStyle,
+            ...{ width: `${percentage}%` }
+          }}
+        />
+        <p>{percentage}%</p>
       </div>
     );
-  }
-}
+  };
+
+  return (
+    <div className="info-detail">
+      <h3>Would you would rather...</h3>
+      <div key={question.id + question['optionOne'].text}>
+        <h4>...{question['optionOne'].text}</h4>
+        <p>Votes: {votesOptionOne}</p>
+        {question['optionOne'].votes.indexOf(authedUser) > -1 ? (
+          <img
+            className="my-vote"
+            src={users[authedUser].avatarURL}
+            alt="avatar_image"
+          />
+        ) : null}
+
+        {renderPercentageBar(percentOne)}
+        <p>or</p>
+        <h4>{question['optionTwo'].text}?</h4>
+        <p>Votes: {votesOptionTwo}</p>
+        {question['optionTwo'].votes.indexOf(authedUser) > -1 ? (
+          <img
+            className="my-vote"
+            src={users[authedUser].avatarURL}
+            alt="avatar_image"
+          />
+        ) : null}
+
+        {renderPercentageBar(percentTwo)}
+      </div>
+    </div>
+  );
+};
+
+const UnansweredQuestion = props => {
+  const { question } = props;
+
+  return (
+    <div className="info-detail">
+      <h3>Would you would rather...</h3>
+      <button
+        className="answerBtn"
+        onClick={() => {
+          props.dispatch(saveQuestionAnswer({ question, answer: 'optionOne' }));
+        }}>
+        {question.optionOne.text}
+      </button>
+      <p>or</p>
+      <button
+        className="answerBtn"
+        onClick={() => {
+          props.dispatch(saveQuestionAnswer({ question, answer: 'optionTwo' }));
+        }}>
+        {question.optionTwo.text}?
+      </button>
+    </div>
+  );
+};
+
+const Question = props => {
+  const { question, users, thisShitIsAnswered } = props;
+
+  return (
+    <div>
+      <Nav />
+      <div className="info-container">
+        <div className="info-header">
+          <img src={users[question.author].avatarURL} alt="avatar_image" />
+          <h2>{users[question.author].name} asked:</h2>
+        </div>
+        {thisShitIsAnswered ? (
+          <AnsweredQuestion {...props} />
+        ) : (
+          <UnansweredQuestion {...props} />
+        )}
+      </div>
+    </div>
+  );
+};
 
 function mapStateToProps({ questions, users, authedUser }, props) {
   const questionId = props.match.params.id;
