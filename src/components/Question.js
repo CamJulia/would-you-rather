@@ -110,8 +110,14 @@ function mapStateToProps({ questions, users, authedUser }, props) {
   let thisShitIsAnswered = true;
   const votesOptionOne = question['optionOne']['votes'].length;
   const votesOptionTwo = question['optionTwo']['votes'].length;
-  const percentOne = (100 / (votesOptionOne + votesOptionTwo)) * votesOptionOne;
-  const percentTwo = (100 / (votesOptionOne + votesOptionTwo)) * votesOptionTwo;
+  const percentOne = (
+    (100 / (votesOptionOne + votesOptionTwo)) *
+    votesOptionOne
+  ).toFixed(2);
+  const percentTwo = (
+    (100 / (votesOptionOne + votesOptionTwo)) *
+    votesOptionTwo
+  ).toFixed(2);
 
   const qsAnsweredByAuthedUser = Object.keys(users[authedUser].answers);
 
