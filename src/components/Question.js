@@ -3,6 +3,11 @@ import { connect } from 'react-redux';
 import Nav from './Nav';
 import { saveQuestionAnswer } from '../actions/questions';
 
+const percentBarStyle = {
+  backgroundColor: 'rosybrown',
+  height: '2em'
+};
+
 class Question extends Component {
   render() {
     const {
@@ -15,17 +20,6 @@ class Question extends Component {
       percentOne,
       percentTwo
     } = this.props;
-
-    const percentOneStyle = {
-      backgroundColor: 'rosybrown',
-      height: '2em',
-      width: `${percentOne}%`
-    };
-    const percentTwoStyle = {
-      backgroundColor: 'rosybrown',
-      height: '2em',
-      width: `${percentTwo}%`
-    };
 
     return (
       <div>
@@ -50,7 +44,12 @@ class Question extends Component {
                 ) : null}
 
                 <div className="percent">
-                  <div style={percentOneStyle} />
+                  <div
+                    style={{
+                      ...percentBarStyle,
+                      ...{ width: `${percentOne}%` }
+                    }}
+                  />
                   <p>{percentOne}%</p>
                 </div>
                 <p>or</p>
@@ -65,7 +64,12 @@ class Question extends Component {
                 ) : null}
 
                 <div className="percent">
-                  <div style={percentTwoStyle} />
+                  <div
+                    style={{
+                      ...percentBarStyle,
+                      ...{ width: `${percentTwo}%` }
+                    }}
+                  />
                   <p>{percentTwo}%</p>
                 </div>
               </div>
