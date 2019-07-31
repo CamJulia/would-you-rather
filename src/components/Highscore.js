@@ -8,7 +8,7 @@ class Highscore extends Component {
     const { authedUser, userScores, users } = this.props;
 
     return (
-      <div>
+      <>
         <Nav />
         <h1>Highscore</h1>
         <div>
@@ -53,7 +53,7 @@ class Highscore extends Component {
             </tbody>
           </table>
         </div>
-      </div>
+      </>
     );
   }
 }
