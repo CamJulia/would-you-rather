@@ -22,10 +22,10 @@ class Nav extends Component {
           </div>
           <ul className="navbar-items">
             <li>
-              <NavLink to="/ask">ask</NavLink>
+              <NavLink to="/add">add</NavLink>
             </li>
             <li>
-              <NavLink to="/highscore">highscore</NavLink>
+              <NavLink to="/leaderboard">leaderboard</NavLink>
             </li>
             <li>
               <NavLink to="/" exact onClick={this.resetAuthedUser}>

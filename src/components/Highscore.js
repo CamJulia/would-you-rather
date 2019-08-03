@@ -10,7 +10,7 @@ class Highscore extends Component {
     return (
       <>
         <Nav />
-        <h1>Highscore</h1>
+        <h1>Leaderboard</h1>
         <div>
           <table>
             <tbody>

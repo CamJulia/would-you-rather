@@ -23,8 +23,8 @@ class Page extends Component {
             {this.props.loading === true ? null : (
               <div>
                 <Route exact path="/" component={Dashboard} />
-                <Route exact path="/highscore" component={Highscore} />
-                <Route exact path="/ask" component={Ask} />
+                <Route exact path="/leaderboard" component={Highscore} />
+                <Route exact path="/add" component={Ask} />
                 <Route exact path="/login" component={Login} />
                 <Route path="/questions/:id" component={Question} />
               </div>
