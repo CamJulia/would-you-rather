@@ -7,7 +7,9 @@ import Highscore from './Highscore';
 import Login from './Login';
 import Ask from './Ask';
 import Question from './Question';
-import { Route } from 'react-router-dom';
+import NoMatch from './NoMatch';
+import { Route, Switch } from 'react-router-dom';
+import PrivateRoute from './PrivateRoute';
 
 class Page extends Component {
   setAuthUser = e => {
@@ -18,23 +20,39 @@ class Page extends Component {
   render() {
     return (
       <div>
-        {this.props.authedUser ? (
-          <>
-            {this.props.loading === true ? null : (
-              <div>
-                <Route exact path="/" component={Dashboard} />
-                <Route exact path="/leaderboard" component={Highscore} />
-                <Route exact path="/add" component={Ask} />
+        <>
+          {this.props.loading === true ? null : (
+            <div>
+              <Switch>
                 <Route exact path="/login" component={Login} />
-                <Route path="/questions/:id" component={Question} />
-              </div>
-            )}
-          </>
-        ) : (
-          <div className="loginScreen">
-            <Route exact path="/" component={Login} />
-          </div>
-        )}
+                <PrivateRoute
+                  exact
+                  path="/"
+                  component={Dashboard}
+                  authedUser={this.props.authedUser}
+                />
+                <PrivateRoute
+                  exact
+                  path="/leaderboard"
+                  component={Highscore}
+                  {...this.props}
+                />
+                <PrivateRoute
+                  exact
+                  path="/add"
+                  component={Ask}
+                  {...this.props}
+                />
+                <PrivateRoute
+                  path="/questions/:id"
+                  component={Question}
+                  {...this.props}
+                />
+                <Route component={NoMatch} />
+              </Switch>
+            </div>
+          )}
+        </>
       </div>
     );
   }
