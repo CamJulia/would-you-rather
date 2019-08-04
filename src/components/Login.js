@@ -13,7 +13,10 @@ class Login extends Component {
     const { usersIds, users, authedUser } = this.props;
 
     if (!usersIds.length) return null;
-    if (authedUser) return <Redirect to="/" />;
+    if (authedUser) {
+      if (!this.props.location.state) return <Redirect to="/" />;
+      return <Redirect to={`${this.props.location.state.from.pathname}`} />;
+    }
 
     return (
       <div>
