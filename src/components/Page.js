@@ -29,7 +29,7 @@ class Page extends Component {
                   exact
                   path="/"
                   component={Dashboard}
-                  authedUser={this.props.authedUser}
+                  {...this.props}
                 />
                 <PrivateRoute
                   exact
