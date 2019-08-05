@@ -112,7 +112,8 @@ const Question = props => {
 };
 
 function mapStateToProps({ questions, users, authedUser }, props) {
-  const questionId = props.match.params.id;
+  const questionId = props.computedMatch.params.id;
+
   const question = questions[questionId];
   let thisShitIsAnswered = true;
   const votesOptionOne = question['optionOne']['votes'].length;
