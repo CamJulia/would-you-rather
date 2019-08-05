@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Nav from './Nav';
 import { saveQuestionAnswer } from '../actions/questions';
+import { Redirect } from 'react-router-dom';
 
 const percentBarStyle = {
   backgroundColor: 'rosybrown',
@@ -91,7 +92,9 @@ const UnansweredQuestion = props => {
 };
 
 const Question = props => {
-  const { question, users, thisShitIsAnswered } = props;
+  const { question, users, thisShitIsAnswered, redirect } = props;
+
+  if (redirect) return <Redirect to="/question/does-not-exist" />;
 
   return (
     <div>
@@ -115,6 +118,8 @@ function mapStateToProps({ questions, users, authedUser }, props) {
   const questionId = props.computedMatch.params.id;
 
   const question = questions[questionId];
+  if (!question) return { redirect: true };
+
   let thisShitIsAnswered = true;
   const votesOptionOne = question['optionOne']['votes'].length;
   const votesOptionTwo = question['optionTwo']['votes'].length;
@@ -135,16 +140,6 @@ function mapStateToProps({ questions, users, authedUser }, props) {
     thisShitIsAnswered = false;
   }
 
-  console.log(
-    'This shit is bananas: ',
-    thisShitIsAnswered,
-    qsAnsweredByAuthedUser,
-    questionId,
-    votesOptionOne,
-    votesOptionTwo,
-    percentOne,
-    percentTwo
-  );
   return {
     question,
     users,
